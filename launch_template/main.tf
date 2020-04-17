@@ -1,4 +1,4 @@
-
+data "aws_availability_zones" "all" {}
 provider "aws" {
   region = "us-east-2"
 }
@@ -14,7 +14,7 @@ resource "aws_launch_template" "web1" {
 }
 
 resource "aws_autoscaling_group" "web1" {
-  availability_zones = ["us-east-2a", "us-east-2b"]
+  availability_zones = data.aws_availability_zones.all.names
   desired_capacity   = 0
   max_size           = 1
   min_size           = 0
